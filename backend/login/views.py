@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
-from login.models import add_user, add_session, get_user_data, user_valid
+from login.models import (add_user, add_session, get_user_data, user_valid,
+                          get_user_images, add_user_image)
 
 
 # Create your views here.
@@ -34,3 +35,22 @@ def login(request):
     else:
         return render(request, 'login.html',
                       {'response_message': 'Login Failed.'})
+
+
+def get_images(request):
+    """
+    Get all user Images with his email
+    """
+    email = request.POST['email']
+    images = get_user_images(email)
+    return render(request, 'view.html', images)
+
+
+def add_images_to_user_images(request):
+    """
+    Adding Image to user images
+    """
+    email = request.POST['email']
+    image = request.POST['image']
+    images = add_user_image(email, email)
+    return render(request, 'view.html', {'response_message': 'image added.'})
