@@ -5,12 +5,14 @@ from torch.autograd import Variable
 import argparse
 import os
 import tqdm
-from torchvision.utils import save_image
+#from torchvision.utils import save_image
+from save_image import save_image
 from PIL import Image
 import base64
 from io import BytesIO
 
 mospath = os.getcwd() 
+
 
 class Inference():
     """
@@ -21,9 +23,9 @@ class Inference():
         self.device = torch.device(
             "cuda" if torch.cuda.is_available() else "cpu")
 
-        self.mosaic_WeightsPath = mospath + "/weights/mosaic_10000.pth"
-        self.cuphead_WeightsPath = mospath + "/weights/cuphead_10000.pth"
-        self.starry_night_WeightsPath = mospath + "/weights/starry_night_10000.pth"
+        self.mosaic_WeightsPath = "Fast-Neural-Style-Transfer/weights/mosaic_10000.pth"
+        self.cuphead_WeightsPath = mospath + "Fast-Neural-Style-Transfer/weights/cuphead_10000.pth"
+        self.starry_night_WeightsPath = mospath + "Fast-Neural-Style-Transfer/weights/starry_night_10000.pth"
 
         # instance of style Transfer model.
         self.transformer = TransformerNet().to(self.device)
@@ -58,7 +60,7 @@ class Inference():
         with torch.no_grad():
             stylized_image = denormalize(self.transformer(image_tensor)).cpu()
         imageBytes = save_image(
-            stylized_image, "images/outputs/result.jpeg")
+            stylized_image, "/home/mostafax/Desktop/Style-Transfer-App/Fast-Neural-Style-Transfer/images/result.jpeg")
         
         
         my_string = base64.b64encode(imageBytes)

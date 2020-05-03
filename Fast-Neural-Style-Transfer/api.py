@@ -14,6 +14,8 @@ def index():
 @app.route('/predict/<name>', methods=['GET', 'POST'])
 def prediction(name):
     receiver = request.get_json()
+    print(receiver)
+    print()
     data_json = api.predict(name, receiver['Base64Image'])
     return jsonify({'Base64Image': data_json})
 
