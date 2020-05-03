@@ -40,22 +40,30 @@ def user_valid(email, password):
 
 def get_user_data(email):
     """
-    Gets a specific user articles.
+    Gets a specific user data
     :param email: User email.
-    :return: Dictionary containing User"""
+    :return: Dictionary containing User data
+    """
     user = db.users.find({'email': email})[0]
     return user
 
 
-def get_session_email(session_id):
-    return db.Sessions.find({'_id': ObjectId(session_id)})[0]['user_email']
+def get_user_images(user_email):
+    """
+    Add Image to User account.
+    :param email: User email.
+    :return: Dictionary containing User Image
+    """
+
+    return db.users.find({'email': user_email})[0]['images']
 
 
-def get_user_images(session_id):
-    email = db.Sessions.find({'_id': ObjectId(session_id)})[0]['user_email']
-    return db.users.find({'email': email})[0]['images']
+def add_user_image(user_email, image):
+    """
+    Add Image to User account.
+    :param email: User email.
+    """
 
-
-def add_user_image(user_email):
     user = db.users.find({'email': user_email})[0]
-    
+    # > db.users.update({"email":"Mostafamousa"},{$push:{"images":"2dsd"}})
+    user.update({'email': user_email}, {'$push': {'images': image}})
