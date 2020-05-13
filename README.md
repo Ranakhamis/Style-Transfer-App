@@ -5,6 +5,8 @@ This app allows users to enter pictures and the app transforms them into differe
 
 To open the app follow these steps:
 ------------------------------------
-1- npm install 
-2-pip3 install -r requirements.txt
+1- npm install
+
+2- pip3 install -r requirements.txt
+
 3- put the wights in directory weight
