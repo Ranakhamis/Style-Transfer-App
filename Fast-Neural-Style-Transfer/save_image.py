@@ -103,6 +103,10 @@ def save_image(tensor, filename, nrow=8, padding=2,
     # Add 0.5 after unnormalizing to [0, 255] to round to nearest integer
     ndarr = grid.mul_(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).to('cpu', torch.uint8).numpy()
     im = Image.fromarray(ndarr)
+<<<<<<< HEAD
+    im.save("/home/mohamed/stylrTrans/CBSD_Assignment/Project/Mobile App/assets/result.jpeg")
+=======
+>>>>>>> master
     buf = io.BytesIO()
     im.save(buf, format='JPEG')
     byte_im = buf.getvalue()
